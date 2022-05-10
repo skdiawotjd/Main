@@ -1,0 +1,15 @@
+Category,Id,Content
+BottomButtonPanel,0,1345
+BottomButtonPanel,1,1256
+BottomButtonPanel,2,1326
+BottomButtonPanel,3,1234
+BottomButtonPanel,4,1546
+BottomButtonPanel,5,1734
+BottomButtonPanel,6,1634
+MoveButton,1,마을
+MoveButton,2,의뢰소
+MoveButton,3,리스커
+MoveButton,4,도감
+MoveButton,5,덱
+MoveButton,6,상점가
+MoveButton,7,소환

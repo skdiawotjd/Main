@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Collection.unity
+    guid: f545569b70545d94f9a382454d06d6e9
+  - enabled: 1
+    path: Assets/Scenes/Handle Battle.unity
+    guid: 93287a4979e3b8e49b5c3e48125a489d
+  - enabled: 1
+    path: Assets/Scenes/Incremental Battle.unity
+    guid: c8ad9c073454cf04a87471650bcf2062
+  - enabled: 1
+    path: Assets/Scenes/Quest.unity
+    guid: d5ac67063cb2d0f46bbfa79a803a3e35
+  - enabled: 1
+    path: Assets/Scenes/Summon.unity
+    guid: f4404181c711fd94da5e77d86f5ec42d
+  - enabled: 1
+    path: Assets/Scenes/CharacterInfo.unity
+    guid: 33d002efd5e2d1b4983467dba51c1fc0
+  - enabled: 1
+    path: Assets/Scenes/Shop.unity
+    guid: b56fcdcd4dca3684ea88c2b50dd6de9a
+  - enabled: 1
+    path: Assets/Scenes/Bar.unity
+    guid: 4bf460b1286ebb642837fc62b416e41c
+  - enabled: 1
+    path: Assets/Scenes/Deck.unity
+    guid: bb0ddd876fe0bd043b1e1650982965e3
+  m_configObjects: {}

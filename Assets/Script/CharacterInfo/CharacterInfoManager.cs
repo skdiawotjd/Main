@@ -79,7 +79,6 @@ public class CharacterInfoManager : MonoBehaviour
                 btn.GetComponent<Button>().onClick.AddListener(() => { ClickEquipment(ListEquipmentNumber); });
 
             }
-
         }
     }
 

@@ -77,7 +77,6 @@ public class CharacterInfoManager : MonoBehaviour
             {
                 GameObject btn = Instantiate(Resources.Load("EquipmentButton"), EquipmentContent.transform) as GameObject;
                 btn.GetComponent<Button>().onClick.AddListener(() => { ClickEquipment(ListEquipmentNumber); });
-
             }
         }
     }

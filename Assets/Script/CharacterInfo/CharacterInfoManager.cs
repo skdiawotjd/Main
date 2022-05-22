@@ -115,7 +115,6 @@ public class CharacterInfoManager : MonoBehaviour
 
         UpdateEquipmentStat();
         UpdateVariation(CheckEquipmentNumber());
-        //참치 대뱃살보다 하성이형 뱃살 + 한세 뱃살 sdasdas
     }
 
 

@@ -115,7 +115,7 @@ public class CharacterInfoManager : MonoBehaviour
 
         UpdateEquipmentStat();
         UpdateVariation(CheckEquipmentNumber());
-
+        //asd
     }
 
 

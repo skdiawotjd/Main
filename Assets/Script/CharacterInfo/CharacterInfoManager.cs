@@ -112,6 +112,7 @@ public class CharacterInfoManager : MonoBehaviour
         Debug.Log("해당 장비의 넘버 " + EquipmentNumber);
         Debug.Log("해당 장비의 스탯 " + UserInfoManager.UserInfo.EquipmentDictionary[EquipmentNumber].Stat);
 
+
         UpdateEquipmentStat();
         UpdateVariation(CheckEquipmentNumber());
     }

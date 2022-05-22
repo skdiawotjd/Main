@@ -131,6 +131,7 @@ public class CharacterInfoManager : MonoBehaviour
         SetRiskerStat();
         // 증감을 흰색으로 set
         InitializeVariation();
+
     }
 
     private void UpdateRiskerStat(int ListRiskerNumber)

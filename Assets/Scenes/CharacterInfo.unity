@@ -5204,7 +5204,7 @@ GameObject:
   - component: {fileID: 1879222224}
   - component: {fileID: 1879222223}
   m_Layer: 0
-  m_Name: MainButton
+  m_Name: GradeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5273,7 +5273,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1879222224}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1924791798}
+        m_TargetAssemblyTypeName: SortManager, Assembly-CSharp
+        m_MethodName: SortList
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1879222224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5667,6 +5679,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1924791796}
   - component: {fileID: 1924791797}
+  - component: {fileID: 1924791798}
   m_Layer: 0
   m_Name: SortPanel
   m_TagString: Untagged
@@ -5721,6 +5734,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1924791798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924791795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc35b68980857ef49a7b8c2f6792b143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RiskerContent: {fileID: 1587065867}
+  EquipmentContent: {fileID: 1754340082}
 --- !u!1 &1931271813
 GameObject:
   m_ObjectHideFlags: 0
@@ -5734,7 +5761,7 @@ GameObject:
   - component: {fileID: 1931271816}
   - component: {fileID: 1931271815}
   m_Layer: 0
-  m_Name: CollectionButton
+  m_Name: LevelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5803,7 +5830,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1931271816}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1924791798}
+        m_TargetAssemblyTypeName: SortManager, Assembly-CSharp
+        m_MethodName: SortList
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1931271816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5855,7 +5894,7 @@ GameObject:
   - component: {fileID: 1965864950}
   - component: {fileID: 1965864949}
   m_Layer: 0
-  m_Name: DeckButton
+  m_Name: ClassButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5924,7 +5963,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1965864950}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1924791798}
+        m_TargetAssemblyTypeName: SortManager, Assembly-CSharp
+        m_MethodName: SortList
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1965864950
 MonoBehaviour:
   m_ObjectHideFlags: 0

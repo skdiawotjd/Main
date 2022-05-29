@@ -41,7 +41,11 @@ public class UserInfoManager : MonoBehaviour
         //
         // 서버에서 유저 정보를 받아 와 변수에 저장
         ServerManager.RequsetUserInfo();
-        UserInfo = new UserInfo("skdiawotjd", 1, 10.0f, 100, 200, 2, "리스커", 3, "장비");
+        UserInfo = new UserInfo("skdiawotjd", 1, 10.0f, 100, 200, 
+            2, "리스커", 3, "장비");
+        // public UserInfo(string NewUserName, int NewUserLevel, double NewUserExp, int NewGold, int NewDiamond,
+        // int NewCountRisker, string NewRisker, int NewCountEquipment, string NewEquipment)
+
         // 그렇게 했다는 가정 하에
         // 임시
         
@@ -72,9 +76,9 @@ public class UserInfoManager : MonoBehaviour
                             Debug.Log(UserInfo.Equipment[k].StatOrder + " == " + UserInfo.Riskers[i].ActiveEquipment[m].StatOrder);
                             if (UserInfo.Equipment[k].StatOrder == UserInfo.Riskers[i].ActiveEquipment[m].StatOrder)
                             {
-                                *//*Equipment TemEquipment = UserInfo.Equipment[k];
+                                Equipment TemEquipment = UserInfo.Equipment[k];
                                 UserInfo.Equipment[k] = UserInfo.Riskers[i].ActiveEquipment[m];
-                                UserInfo.Riskers[i].ActiveEquipment[m] = TemEquipment;*//*
+                                UserInfo.Riskers[i].ActiveEquipment[m] = TemEquipment;
 
                                 BeEuipment = UserInfo.Riskers[i].ActiveEquipment[m];
                                 ToBeEuipment = UserInfo.Equipment[k];
@@ -88,8 +92,8 @@ public class UserInfoManager : MonoBehaviour
                 break;
             }
         }
-    }
-    public void ApplyEquipment()
+    }*/
+    /*public void ApplyEquipment()
     {
         Equipment TemEquipment = ToBeEuipment;
         ToBeEuipment = BeEuipment;

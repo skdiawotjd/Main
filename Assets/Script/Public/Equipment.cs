@@ -1,21 +1,27 @@
 public class Equipment
 {
-    private int _equipmentNumber = -1;
-    private int _owerNumber = -1;
+    private int _equipmentnumber = -1;
+    private int _owernumber = -1;
     private int _stat = -1;
+    // 1 - ¹«±â
+    private int _statorder = -1;
 
     public int EquipmentNumber
     {
         get
         {
-            return _equipmentNumber;
+            return _equipmentnumber;
         }
     }
     public int OwerNumber
     {
         get
         {
-            return _owerNumber;
+            return _owernumber;
+        }
+        set
+        {
+            _owernumber = value;
         }
     }
     public int Stat
@@ -25,8 +31,15 @@ public class Equipment
             return _stat;
         }
     }
+    public int StatOrder
+    {
+        get
+        {
+            return _statorder;
+        }
+    }
 
-    public int StatOrder()
+    public int SetStatOrder()
     {
         if (EquipmentNumber == 1)
         {
@@ -38,9 +51,10 @@ public class Equipment
 
     public Equipment(int NewEquipmentNumber, int NewOwerNumber, int NewStat)
     {
-        _equipmentNumber = NewEquipmentNumber;
-        _owerNumber = NewOwerNumber;
+        _equipmentnumber = NewEquipmentNumber;
+        _owernumber = NewOwerNumber;
         _stat = NewStat * 1000;
+        _statorder = 1;
     }
 }
 

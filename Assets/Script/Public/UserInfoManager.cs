@@ -40,7 +40,7 @@ public class UserInfoManager : MonoBehaviour
 
         //
         // 서버에서 유저 정보를 받아 와 변수에 저장
-        ServerManager.RequsetUserInfo();
+        ServerManager.GetUserInfo();
         UserInfo = new UserInfo("skdiawotjd", 1, 10.0f, 100, 200, 
             2, "리스커", 3, "장비");
         // public UserInfo(string NewUserName, int NewUserLevel, double NewUserExp, int NewGold, int NewDiamond,
@@ -59,6 +59,7 @@ public class UserInfoManager : MonoBehaviour
         //
     }
 
+    
 
 
     /*public void SetChangeEquipment(int RiskerNumber, int ToBeEuipmentNumber)

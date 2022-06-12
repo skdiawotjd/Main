@@ -16,6 +16,14 @@ public class UserInfo
     private int _diamond;
     private Image _userimage;
 
+    /// <summary>
+    /// 리스트 0번 : 메인퀘스트
+    /// 리스트 1번 : 일일퀘스트
+    /// 리스트 2번 : 주간퀘스트
+    /// 리스트 3번 : 긴급퀘스트
+    /// </summary>
+    private List<QuestInfo> QuestList;
+
     /*    private List<Risker> _riskers = new List<Risker>();
         private List<Equipment> _equipment = new List<Equipment>();*/
 
@@ -126,10 +134,11 @@ public class UserInfo
 
     public Dictionary<string, Risker> RiskerDictionary;
     public Dictionary<string, Equipment> EquipmentDictionary;
+    public Dictionary<string, QuestInfo> QuestDictionary;
 
     // 리스커 클래스의 정보 부족, 장비 클래스의 정보
     public UserInfo(string NewUserCode, string NewUserName, int NewUserLevel, double NewUserExp, int NewGold, int NewDiamond,
-        string NewRisker, string NewEquipment)
+        string NewRisker, string NewEquipment, string NewQuest)
     /*public UserInfo(string NewUserName, int NewUserLevel, double NewUserExp, int NewGold, int NewDiamond,
         string NewRisker, string NewEquipment)*/
     {
@@ -142,12 +151,14 @@ public class UserInfo
 
         RiskerDictionary = new Dictionary<string, Risker>();
         EquipmentDictionary = new Dictionary<string, Equipment>();
+        QuestDictionary = new Dictionary<string, QuestInfo>();
 
         // 리스커 저장
         CreateObject(NewRisker, 1);
         // 장비 저장
         CreateObject(NewEquipment, 2);
         // 퀘스트 저장
+        //CreateObject(NewQuest, 3);
 
     }
 
@@ -246,6 +257,7 @@ public class UserInfo
                 break;
             case 3:
                 // 퀘스트 객체 생성
+                
                 break;
         }
 

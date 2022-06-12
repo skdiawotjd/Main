@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MainManager : MonoBehaviour
 {
-    public SPUM_Prefabs spum;
+    //public SPUM_Prefabs spum;
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine("abc");
+        //StartCoroutine("abc");
     }
 
     // Update is called once per frame
@@ -18,7 +18,7 @@ public class MainManager : MonoBehaviour
         
     }
 
-    IEnumerator abc()
+    /*IEnumerator abc()
     {
         while(true)
         {
@@ -27,5 +27,5 @@ public class MainManager : MonoBehaviour
 
             yield return new WaitForSeconds(1.0f);
         }
-    }
+    }*/
 }

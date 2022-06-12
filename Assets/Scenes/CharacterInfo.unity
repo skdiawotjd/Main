@@ -4676,6 +4676,7 @@ MonoBehaviour:
   CharacterStat: {fileID: 713657309}
   CharacterScrollView: {fileID: 1588748637}
   EquipmentScrollView: {fileID: 283321136}
+  SetButton: {fileID: 1894798549}
   Variation: {fileID: 1460408559}
   TextVal: {fileID: 538844331}
 --- !u!4 &1718828672
@@ -5342,7 +5343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1894798548
 RectTransform:
   m_ObjectHideFlags: 0

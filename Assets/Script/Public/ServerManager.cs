@@ -8,11 +8,18 @@ public class ServerManager : MonoBehaviour
     // 서버와 통신하기 위한 웹소켓 변수
     private WebSocket m_WebSocket;
 
+    public UserInfoManager UserInfoManager;
+
+    //private string UserInfoString = "";
+    private int UserDataIndex = 0;
+
     // 서버에서 데이터를 받기 위한 특정 상태 확인용 변수
-    // 1 - 로그인, 2 - 유저정보 받기
-    int _state = 1;
+    /// <summary>
+    /// 1 - 로그인, 2 - 유저정보 받기
+    /// </summary> 
+    private int _state = 1;
     // 프로퍼티에 이벤트 연결
-    int State
+    public int State
     {
         set
         {
@@ -23,7 +30,6 @@ public class ServerManager : MonoBehaviour
         {
             return _state;
         }
-        
     }
     
     void Start()
@@ -55,22 +61,26 @@ public class ServerManager : MonoBehaviour
                     }
                     break;
                 case 2:
-                    // State가 2일 때 서버에서 유저의 정보를 캐릭터 개수만큼 보내준다
-                    // 전부 다 보내면 마지막으로 3을 보낸다
-                    if(!int.TryParse(e.Data, out ParseInt))
+                case 3:
+                case 4:
+                    // State가 2일 때 서버에서 유저의 정보를 User_Info, Risker, Equipment를 순차적으로 보내준다
+                    // 처음 State가 2에서 각 값을 받을 때마다 State가 1 씩 증가하여 최종적으로 5가 된다
+                    if (!int.TryParse(e.Data, out ParseInt))
                     {
                         Debug.Log("2-1. 받은 유저 정보 : " + e.Data);
-                    }
-                    else
-                    {
-                        if(ParseInt == 3)
-                        {
-                            Debug.Log("서버에서 유저 정보 다 받음");
-                            State = 0;
-                        }
+                        //
+                        // UserInfoManager.UpdatedUserData를 불러야 되는데 UserInfoManager를 불러 저장
+                        // public string this[int index]가 아닌 public string[] UpdatedUserData를 부르고 싶음
+                        UserInfoManager[UserDataIndex++] = e.Data;
+                        //UserInfoManager.UpdatedUserData[UserDataIndex++] = e.Data;
+                        //
+                        //
+
+                        State++;
                     }
                     break;
             }
+            ParseInt = 0;
         };
 
         CheckState();
@@ -83,12 +93,28 @@ public class ServerManager : MonoBehaviour
         {
             case 0:
                 Debug.Log("서버 통신 대기");
+                UserDataIndex = 0;
                 break;
             case 1:
+                Debug.Log("로그인 시작");
                 Login();
                 break;
             case 2:
-                RequsetUserInfo();
+                Debug.Log("UserInfo 데이터 요청");
+                RequestUserInfo(0);
+                break;
+            case 3:
+                Debug.Log("Risker 데이터 요청");
+                RequestUserInfo(1);
+                break;
+            case 4:
+                Debug.Log("Equipment 데이터 요청");
+                RequestUserInfo(2);
+                break;
+            case 5:
+                Debug.Log("데이터를 모두 받아 State를 0으로 변경 후 데이터 저장");
+                State = 0;
+                UserInfoManager.SetUserData();
                 break;
         }
     }
@@ -100,24 +126,19 @@ public class ServerManager : MonoBehaviour
         m_WebSocket.Send("admin");
     }
 
-    private void RequsetUserInfo()
+    /// <summary>
+    /// 0 - 유저정보, 1 - 리스커, 2 - 장비
+    /// </summary> 
+    public void RequestUserInfo(int UserDataIndex)
     {
-        Debug.Log("2. 유저 정보 가져오기");
-        m_WebSocket.Send("0");
+        this.UserDataIndex = UserDataIndex;
+        //Debug.Log("2. 유저 정보 가져오기 + UserDataIndex = " + this.UserDataIndex.ToString());
+        m_WebSocket.Send(this.UserDataIndex.ToString());
     }
 
     private void ResponseUserInfo()
     {
         Debug.Log("2. 유저 정보 보내기");
-    }
-
-    public void GetUserInfo()
-    {
-        //Debug.Log("1");
-    }
-    public void SetUserInfo()
-    {
-        //State = 4;
     }
 }
 

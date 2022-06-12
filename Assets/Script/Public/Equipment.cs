@@ -1,19 +1,27 @@
 public class Equipment
 {
-    private int _equipmentnumber = -1;
-    private int _owernumber = -1;
+    private string _equipmentnumber;
+    private int _equipmentType;
+    private string _owernumber;
     private int _stat = -1;
     // 1 - ¹«±â
     private int _statorder = -1;
 
-    public int EquipmentNumber
+    public string EquipmentNumber
     {
         get
         {
             return _equipmentnumber;
         }
     }
-    public int OwerNumber
+    public int EquipmentType
+    {
+        get
+        {
+            return _equipmentType;
+        }
+    }
+    public string OwerNumber
     {
         get
         {
@@ -39,22 +47,13 @@ public class Equipment
         }
     }
 
-    public int SetStatOrder()
-    {
-        if (EquipmentNumber == 1)
-        {
-            return 1;
-        }
-
-        return 0;
-    }
-
-    public Equipment(int NewEquipmentNumber, int NewOwerNumber, int NewStat)
+    public Equipment(string NewEquipmentNumber, int NewEquipmentType, string NewOwerNumber, int StatOrder,  int NewStat)
     {
         _equipmentnumber = NewEquipmentNumber;
+        _equipmentType = NewEquipmentType;
         _owernumber = NewOwerNumber;
-        _stat = NewStat * 1000;
-        _statorder = 1;
+        _statorder = StatOrder;
+        _stat = NewStat;
     }
 }
 

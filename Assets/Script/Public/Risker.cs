@@ -3,15 +3,15 @@ using System.Collections.Generic;
 // 리스커 클래스
 public class Risker
 {
-    private int _riskerNumber = -1;
+    private string _riskerNumber;
     private int _riskerLevel = -1;
     private double _riskerExp = -1;
     //private List<Equipment> _activeEquipment = new List<Equipment>();
 
-    private int _statStr = -1;
-    private int _statInt = -1;
-    private int _statDef = -1;
-    private int _statAgi = -1;
+    private int _statStr = 1;
+    private int _statInt = 1;
+    private int _statDef = 1;
+    private int _statAgi = 1;
 
     private int _physicalAttack = -1;
     private int _magcialAttack = -1;
@@ -20,10 +20,10 @@ public class Risker
     private int _speed = -1;
 
     //private string ActiveEquipmentNumber = "";
-    private int[] _activeEquipmentNumber = new int[4];
+    private string[] _activeEquipmentNumber = new string[2];
 
     // get/set 모두 가능
-    public int RiskerNumber
+    public string RiskerNumber
     {
         get
         {
@@ -56,17 +56,17 @@ public class Risker
             _riskerExp = value;
         }
     }
-    /*public List<Equipment> ActiveEquipment
+    public string[] ActiveEquipment
     {
         get
         {
-            return _activeEquipment;
+            return _activeEquipmentNumber;
         }
         set
         {
-            _activeEquipment = value;
+            _activeEquipmentNumber = value;
         }
-    }*/
+    }
     public int StatStr
     {
         get
@@ -173,7 +173,7 @@ public class Risker
         }
     }
 
-    public int[] ActiveEquipmentNumber
+    public string[] ActiveEquipmentNumber
     {
         get
         {
@@ -199,9 +199,11 @@ public class Risker
         }*/
 
 
-    public void SetEquipment(int EquipmentNumber)
+    public void SetEquipment(int EquipmentType, string EquipmentNumber)
     {
-        if (EquipmentNumber < 1000)
+        ActiveEquipmentNumber[EquipmentType-1] = EquipmentNumber;
+
+        /*if (EquipmentNumber < 1000)
         {
             ActiveEquipmentNumber[0] = EquipmentNumber;
         }
@@ -216,7 +218,7 @@ public class Risker
         else if (EquipmentNumber < 4000)
         {
             ActiveEquipmentNumber[3] = EquipmentNumber;
-        }
+        }*/
 
 
         /*switch(StatOrder)
@@ -245,27 +247,42 @@ public class Risker
         }*/
     }
 
-    public Risker(int NewRiskerNumber, int NewRiskerLevel, double NewRiskerExp, int NewStatStr, int NewStatInt, int NewStatDef, int NewStatAgi)
+    public Risker(string NewRiskerNumber, int NewRiskerLevel, double NewRiskerExp, string NewActiveEquipmentNumber)
     {
         RiskerNumber = NewRiskerNumber;
         RiskerLevel = NewRiskerLevel;
         RiskerExp = NewRiskerExp;
 
-        StatStr = NewStatStr;
-        StatInt = NewStatInt;
-        StatDef = NewStatDef;
-        StatAgi = NewStatAgi;
-
-
-        _physicalAttack = _statStr;
+        _physicalAttack = StatStr;
         _magcialAttack = StatInt;
         _hp = StatDef;
         _defense = StatDef;
         _speed = StatAgi;
 
-        for (int i = 0; i < ActiveEquipmentNumber.Length; i++)
+        int index = -2;
+        string tem_str = "";
+        List<string> tem_list = new List<string>();
+
+        // 1100","0"
+        while (index != -1)
         {
-            ActiveEquipmentNumber[i] = -1;
+            // 한번 사용 후 이전 값을 지우기 위해 초기화
+            tem_str = "";
+            //,"에서 2칸 더 가야 값이므로
+            index += 2;
+
+            while (NewActiveEquipmentNumber[index] != '\"')
+            {
+                tem_str += NewActiveEquipmentNumber[index++];
+            }
+            tem_list.Add(tem_str);
+
+            index = NewActiveEquipmentNumber.IndexOf(",\"", index);
+        }
+
+        for (int  i = 0; i < tem_list.Count; i++)
+        {
+            ActiveEquipment[i] = tem_list[i];
         }
     }
 }

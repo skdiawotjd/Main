@@ -17,6 +17,7 @@ public class CharacterInfoManager : MonoBehaviour
     public GameObject CharacterStat;
     public GameObject CharacterScrollView;
     public GameObject EquipmentScrollView;
+    public Button SetButton;
 
     // 스탯의 증감에 따른 이미지 출력 오브젝트
     public GameObject Variation;
@@ -28,8 +29,8 @@ public class CharacterInfoManager : MonoBehaviour
     private TextMeshProUGUI[] TextValGroup;
 
     // 선택된 리스커 / 장비
-    private int SelectedRiskerNumber = -1;
-    private int SelectedEquipmentNumber = -1;
+    private string SelectedRiskerNumber;
+    private string SelectedEquipmentNumber;
 
     // 클릭한 버튼을 임시로 저장하는 변수
     private Button DestroyButton;
@@ -66,8 +67,8 @@ public class CharacterInfoManager : MonoBehaviour
     {
         foreach (var Risker in UserInfoManager.UserInfo.RiskerDictionary)
         {
-            // 0이면 리스커 버튼 생성
-            CreateButton(0, Risker.Value.RiskerNumber);
+            // 1이면 리스커 버튼 생성
+            CreateButton(1, Risker.Value.RiskerNumber);
         }
 
     }
@@ -77,39 +78,48 @@ public class CharacterInfoManager : MonoBehaviour
         foreach (var Equipment in UserInfoManager.UserInfo.EquipmentDictionary)
         {
             // 해당 장비를 소유한 캐릭터가 없을 때
-            if (Equipment.Value.OwerNumber == -1)
+            if (Equipment.Value.OwerNumber == "0")
             {
-                // 1이면 장비 버튼 생성
-                CreateButton(1, Equipment.Value.EquipmentNumber);
+                // 2이면 장비 버튼 생성
+                CreateButton(2, Equipment.Value.EquipmentNumber);
             }
         }
     }
 
-    private void CreateButton(int Order, int Number)
+    /// <summary>
+    /// ButtonType : 1 - 리스커, 2 - 장비
+    /// </summary> 
+    private void CreateButton(int ButtonType, string Number)
     {
-        switch (Order)
+        switch (ButtonType)
         {
-            case 0:
+            case 1:
                 // 리스커 버튼 생성
                 GameObject RiskerButton = Instantiate(Resources.Load("RiskerButton"), RiskerContent.transform) as GameObject;
                 RiskerButton.GetComponent<Button>().onClick.AddListener(() => { ClickRisker(Number); });
+                // 리스커 버튼을 정렬하기 위해 RiskerNumber를 버튼 이름으로 변경
+                RiskerButton.name = Number;
                 // 생성한 버튼을 SortManager의 리스트에 저장하기
 
                 break;
-            case 1:
+            case 2:
                 // 장비 버튼 생성
                 GameObject EquipmentButton = Instantiate(Resources.Load("EquipmentButton"), EquipmentContent.transform) as GameObject;
                 EquipmentButton.GetComponent<Button>().onClick.AddListener(() => { ClickEquipment(Number, EquipmentButton.GetComponent<Button>()); });
+                // 장비 버튼을 정렬하기 위해 EquipmentNumber를 버튼 이름으로 변경
+                EquipmentButton.name = Number;
                 // 생성한 버튼을 SortManager의 리스트에 저장하기
 
                 break;
         }
     }
 
-    private void ClickRisker(int RiskerNumber)
+    private void ClickRisker(string RiskerNumber)
     {
         // 보일거 안보일거 설정
         SetActiveObject(true);
+        // 장착 버튼 비활성화
+        SetButton.gameObject.SetActive(false);
         // 선택된 RiskerNumber를 저장
         SelectedRiskerNumber = RiskerNumber;
         // Variation 초기화
@@ -119,7 +129,7 @@ public class CharacterInfoManager : MonoBehaviour
         // 리스커에 장착된 장비가 있으면 장비 스탯 더하기
         for (int i = 0; i < UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber.Length; i++)
         {
-            if (UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[i] != -1)
+            if (UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[i] != "0")
             {
                 // 선택된 EquipmentNumber를 저장
                 SelectedEquipmentNumber = UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[i];
@@ -129,7 +139,7 @@ public class CharacterInfoManager : MonoBehaviour
         // 최종적인 Stat을 PreStat에 저장
         SetRiskerStat();
     }
-    private void ClickEquipment(int EquipmentNumber, Button ClickedButton)
+    private void ClickEquipment(string EquipmentNumber, Button ClickedButton)
     {
         SelectedEquipmentNumber = EquipmentNumber;
 
@@ -139,6 +149,8 @@ public class CharacterInfoManager : MonoBehaviour
         UpdateEquipmentStat();
         UpdateVariation(CheckEquipmentType());
 
+        // 장비 버튼 클릭 시 장착 버튼 활성화
+        SetButton.gameObject.SetActive(true);
         // 선택된 장비 버튼을 추후에 삭제하기 위해 해당 버튼을 저장
         DestroyButton = ClickedButton;
     }
@@ -147,12 +159,13 @@ public class CharacterInfoManager : MonoBehaviour
     public void SetEquipment()
     {
         // 1. 선택한 장비 종류와 동일한 장비 종류를 착용하고 있는지 확인
-        if (UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[CheckEquipmentType()] != -1)
+        Debug.Log("선택된 리스커의 ActiveEquipmentNumber[" + UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[CheckEquipmentType()] + "]");
+        if (UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[CheckEquipmentType()] != "0")
         {
             // 2-1. 장착하고 있다면 새로운 장비 버튼 생성
-            CreateButton(1, UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[CheckEquipmentType()]);
+            CreateButton(2, UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[CheckEquipmentType()]);
             // 2-2. 장착 해제된 장비의 OwnerNumber 초기화 
-            UserInfoManager.UserInfo.EquipmentDictionary[UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[CheckEquipmentType()]].OwerNumber = -1;
+            UserInfoManager.UserInfo.EquipmentDictionary[UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[CheckEquipmentType()]].OwerNumber = "0";
         }
         // 2. 없다면 넘어가고
         // 3. 새로 장착된 장비의 OwnerNumber 변경
@@ -167,9 +180,11 @@ public class CharacterInfoManager : MonoBehaviour
         InitializeVariation();
         // 8. 선택한 버튼 삭제
         Destroy(DestroyButton.gameObject);
+        // 9. 장착 버튼 비활성화
+        SetButton.gameObject.SetActive(false);
     }
 
-    private void UpdateRiskerStat(int ListRiskerNumber)
+    private void UpdateRiskerStat(string ListRiskerNumber)
     {
         for (int i = 0; i < 6; i++)
         {
@@ -179,15 +194,15 @@ public class CharacterInfoManager : MonoBehaviour
 
     private int CheckEquipmentType()
     {
-        if (SelectedEquipmentNumber < 1000)
+        if (UserInfoManager.UserInfo.EquipmentDictionary[SelectedEquipmentNumber].StatOrder == 1)
         {
             return 0;
         }
-        else if (SelectedEquipmentNumber < 2000)
+        else if (UserInfoManager.UserInfo.EquipmentDictionary[SelectedEquipmentNumber].StatOrder == 2)
         {
             return 1;
         }
-        else if (SelectedEquipmentNumber < 3000)
+        else if (UserInfoManager.UserInfo.EquipmentDictionary[SelectedEquipmentNumber].StatOrder == 3)
         {
             return 2;
         }
@@ -197,9 +212,15 @@ public class CharacterInfoManager : MonoBehaviour
         }
     }
 
+
+    /*
+     StatOrder는 str/int/defense/agi를 구분하는 것인데
+    CharacterInfoManager의 UpdateEquipmentStat()에서는
+    물공/마공/체력,방어력/공속으로 사용됨
+     */
     private void UpdateEquipmentStat()
     {
-        Debug.Log("능력치 " + UserInfoManager.UserInfo.EquipmentDictionary[SelectedEquipmentNumber].Stat);
+        Debug.Log("장착된 장비 능력치 " + UserInfoManager.UserInfo.EquipmentDictionary[SelectedEquipmentNumber].Stat);
         // 해당 장비의 StatOrder를 통해 어느 스탯인지 확인
         switch (UserInfoManager.UserInfo.EquipmentDictionary[SelectedEquipmentNumber].StatOrder)
         {

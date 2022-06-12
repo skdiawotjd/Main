@@ -139,34 +139,59 @@ public class UserInfoManager : MonoBehaviour
 
     // User_Info, Risker, Equipment가 각각 갱신되는 함수 필요
 
-
-    private void CreateUserInfo()
+    private void SplitString(string SeparatorString, char UntilString, string StringForCount, ref List<string> tem_list)
     {
         int index = 0;
         string tem_str = "";
-        List<string> tem_list = new List<string>();
 
-        Debug.Log(UpdatedUserData[0]);
-        for (index = UpdatedUserData[0].IndexOf(":\"", index); index != -1;)
+        Debug.Log(StringForCount);
+        for (index = StringForCount.IndexOf(SeparatorString, index); index != -1;)
         {
             // 한번 사용 후 이전 값을 지우기 위해 초기화
             tem_str = "";
             //:"에서 2칸 더 가야 값이므로
             index += 2;
             // "가 나올 때 까지 계속 임시 str에 추가 (:"0000")
-            while (UpdatedUserData[0][index] != '\"')
+            while (StringForCount[index] != UntilString)
             {
-                tem_str += UpdatedUserData[0][index++];
+                tem_str += StringForCount[index++];
             }
             //Debug.Log(tem_str);
             tem_list.Add(tem_str);
 
-            index = UpdatedUserData[0].IndexOf(":\"", index);
+            index = StringForCount.IndexOf(SeparatorString, index);
         }
+    }
+    private void CreateUserInfo()
+    {
+        List<string> tem_list = new List<string>();
+        SplitString(":\"", '\"', UpdatedUserData[0], ref tem_list);
+        //SplitString("[\"", ']', UpdatedUserData[0], ref tem_list);
+        /* int index = 0;
+         string tem_str = "";
+         List<string> tem_list = new List<string>();
+
+         Debug.Log(UpdatedUserData[0]);
+         for (index = UpdatedUserData[0].IndexOf(":\"", index); index != -1;)
+         {
+             // 한번 사용 후 이전 값을 지우기 위해 초기화
+             tem_str = "";
+             //:"에서 2칸 더 가야 값이므로
+             index += 2;
+             // "가 나올 때 까지 계속 임시 str에 추가 (:"0000")
+             while (UpdatedUserData[0][index] != '\"')
+             {
+                 tem_str += UpdatedUserData[0][index++];
+             }
+             //Debug.Log(tem_str);
+             tem_list.Add(tem_str);
+
+             index = UpdatedUserData[0].IndexOf(":\"", index);
+         }*/
 
         UserInfo = new UserInfo(tem_list[0], tem_list[1], int.Parse(string.Format("{0}", tem_list[2])), double.Parse(string.Format("{0}", tem_list[3])),
             int.Parse(string.Format("{0}", tem_list[4])), int.Parse(string.Format("{0}", tem_list[5])),
-            UpdatedUserData[1], UpdatedUserData[2]);
+            UpdatedUserData[1], UpdatedUserData[2], "quest");
 
         /*UserInfo = new UserInfo("skdiawotjd", 1, 10.0f, 100, 200, 
             2, "리스커", 3, "장비");*/

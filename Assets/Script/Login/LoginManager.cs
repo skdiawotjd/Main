@@ -9,18 +9,11 @@ public class LoginManager : MonoBehaviour
 
     private UserInfoManager UserInfoManager;
 
-    // Start is called before the first frame update
     void Start()
     {
         UserInfoManager = GameObject.Find("UserInfoManager").GetComponent<UserInfoManager>();
 
         StartCoroutine("StartGame");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void MoveMainScene()
@@ -30,7 +23,7 @@ public class LoginManager : MonoBehaviour
 
     IEnumerator StartGame()
     {
-        while(!UserInfoManager.IsReady())
+        while(!UserInfoManager.Ok)
         {
             yield return new WaitForSeconds(0.01f);
         }

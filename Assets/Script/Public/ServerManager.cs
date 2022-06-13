@@ -8,14 +8,14 @@ public class ServerManager : MonoBehaviour
     // 서버와 통신하기 위한 웹소켓 변수
     private WebSocket m_WebSocket;
 
-    public UserInfoManager UserInfoManager;
-
-    //private string UserInfoString = "";
+    // UserInfoManager의 _updateduserdata의 Index
     private int UserDataIndex = 0;
+
+    public UserInfoManager UserInfoManager;
 
     // 서버에서 데이터를 받기 위한 특정 상태 확인용 변수
     /// <summary>
-    /// 1 - 로그인, 2 - 유저정보 받기
+    /// 1 - 로그인, 2 - UserInfo, 3 - Quest, 4 - Risker, 5 - Equipment, 6 - UserInfo 객체 생성
     /// </summary> 
     private int _state = 1;
     // 프로퍼티에 이벤트 연결
@@ -52,7 +52,6 @@ public class ServerManager : MonoBehaviour
                     if(int.Parse(string.Format("{0}", e.Data)) == 1)
                     {
                         Debug.Log("1-1. 서버에서 동일한 아이디 확인");
-                        // State 변경
                         State = 2;
                     }
                     else
@@ -63,6 +62,7 @@ public class ServerManager : MonoBehaviour
                 case 2:
                 case 3:
                 case 4:
+                case 5:
                     // State가 2일 때 서버에서 유저의 정보를 User_Info, Risker, Equipment를 순차적으로 보내준다
                     // 처음 State가 2에서 각 값을 받을 때마다 State가 1 씩 증가하여 최종적으로 5가 된다
                     if (!int.TryParse(e.Data, out ParseInt))
@@ -104,17 +104,23 @@ public class ServerManager : MonoBehaviour
                 RequestUserInfo(0);
                 break;
             case 3:
-                Debug.Log("Risker 데이터 요청");
+                Debug.Log("Quest 데이터 요청");
                 RequestUserInfo(1);
                 break;
             case 4:
-                Debug.Log("Equipment 데이터 요청");
+                Debug.Log("Risker 데이터 요청");
                 RequestUserInfo(2);
                 break;
             case 5:
+                Debug.Log("Equipment 데이터 요청");
+                RequestUserInfo(3);
+                break;
+            case 6:
                 Debug.Log("데이터를 모두 받아 State를 0으로 변경 후 데이터 저장");
                 State = 0;
+                UserDataIndex = 0;
                 UserInfoManager.SetUserData();
+                UserInfoManager.CreateUserInfo();
                 break;
         }
     }
@@ -127,7 +133,7 @@ public class ServerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 0 - 유저정보, 1 - 리스커, 2 - 장비
+    /// 0 - 유저정보, 1 - 퀘스트, 2 - 리스커, 3 - 장비
     /// </summary> 
     public void RequestUserInfo(int UserDataIndex)
     {

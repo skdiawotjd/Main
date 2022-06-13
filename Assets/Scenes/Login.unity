@@ -285,7 +285,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 787b723b59be9b644a2f31d0d14fa084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UserInfoManager: {fileID: 7810590467991616071}
 --- !u!4 &548315511
 Transform:
   m_ObjectHideFlags: 0
@@ -409,7 +408,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 785208251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 320be28425b28324b9a4d8f42b225aae, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a23d62a19c272c408442b195f09f526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   StartButton: {fileID: 140732910}

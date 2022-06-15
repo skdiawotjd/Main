@@ -147,7 +147,8 @@ public class CharacterInfoManager : MonoBehaviour
         Debug.Log("해당 장비의 스탯 " + UserInfoManager.UserInfo.EquipmentDictionary[SelectedEquipmentNumber].Stat);
 
         UpdateEquipmentStat();
-        UpdateVariation(CheckEquipmentType());
+        //UpdateVariation(CheckEquipmentType());
+        UpdateVariation(UserInfoManager.UserInfo.EquipmentDictionary[SelectedEquipmentNumber].StatOrder);
 
         // 장비 버튼 클릭 시 장착 버튼 활성화
         SetButton.gameObject.SetActive(true);
@@ -159,13 +160,13 @@ public class CharacterInfoManager : MonoBehaviour
     public void SetEquipment()
     {
         // 1. 선택한 장비 종류와 동일한 장비 종류를 착용하고 있는지 확인
-        Debug.Log("선택된 리스커의 ActiveEquipmentNumber[" + UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[CheckEquipmentType()] + "]");
-        if (UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[CheckEquipmentType()] != "0")
+        Debug.Log("선택된 리스커의 ActiveEquipmentNumber[" + UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[((SelectedEquipmentNumber[0] - '0') - 1)] + "]");
+        if (UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[((SelectedEquipmentNumber[0] - '0') - 1)] != "0")
         {
             // 2-1. 장착하고 있다면 새로운 장비 버튼 생성
-            CreateButton(2, UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[CheckEquipmentType()]);
+            CreateButton(2, UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[((SelectedEquipmentNumber[0] - '0') - 1)]);
             // 2-2. 장착 해제된 장비의 OwnerNumber 초기화 
-            UserInfoManager.UserInfo.EquipmentDictionary[UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[CheckEquipmentType()]].OwerNumber = "0";
+            UserInfoManager.UserInfo.EquipmentDictionary[UserInfoManager.UserInfo.RiskerDictionary[SelectedRiskerNumber].ActiveEquipmentNumber[((SelectedEquipmentNumber[0] - '0') - 1)]].OwerNumber = "0";
         }
         // 2. 없다면 넘어가고
         // 3. 새로 장착된 장비의 OwnerNumber 변경
@@ -192,32 +193,6 @@ public class CharacterInfoManager : MonoBehaviour
         }
     }
 
-    private int CheckEquipmentType()
-    {
-        if (UserInfoManager.UserInfo.EquipmentDictionary[SelectedEquipmentNumber].StatOrder == 1)
-        {
-            return 0;
-        }
-        else if (UserInfoManager.UserInfo.EquipmentDictionary[SelectedEquipmentNumber].StatOrder == 2)
-        {
-            return 1;
-        }
-        else if (UserInfoManager.UserInfo.EquipmentDictionary[SelectedEquipmentNumber].StatOrder == 3)
-        {
-            return 2;
-        }
-        else
-        {
-            return 3;
-        }
-    }
-
-
-    /*
-     StatOrder는 str/int/defense/agi를 구분하는 것인데
-    CharacterInfoManager의 UpdateEquipmentStat()에서는
-    물공/마공/체력,방어력/공속으로 사용됨
-     */
     private void UpdateEquipmentStat()
     {
         Debug.Log("장착된 장비 능력치 " + UserInfoManager.UserInfo.EquipmentDictionary[SelectedEquipmentNumber].Stat);
@@ -242,21 +217,21 @@ public class CharacterInfoManager : MonoBehaviour
 
     private void UpdateVariation(int StatOrder)
     {
-        Debug.Log(TextValGroup[StatOrder + 1].text + " - " + PreStat[StatOrder].ToString());
-        if (int.Parse(string.Format("{0}", TextValGroup[StatOrder + 1].text)) - PreStat[StatOrder] > 0)
+        Debug.Log(TextValGroup[StatOrder].text + " - " + PreStat[StatOrder - 1].ToString());
+        if (int.Parse(string.Format("{0}", TextValGroup[StatOrder].text)) - PreStat[StatOrder - 1] > 0)
         {
             Debug.Log("증가");
-            VariationGroup[StatOrder].color = new Color32(255, 0, 0, 255);
+            VariationGroup[StatOrder - 1].color = new Color32(255, 0, 0, 255);
         }
-        else if (int.Parse(string.Format("{0}", TextValGroup[StatOrder + 1].text)) - PreStat[StatOrder] == 0)
+        else if (int.Parse(string.Format("{0}", TextValGroup[StatOrder].text)) - PreStat[StatOrder - 1] == 0)
         {
             Debug.Log("그대로");
-            VariationGroup[StatOrder].color = new Color32(255, 255, 255, 255);
+            VariationGroup[StatOrder - 1].color = new Color32(255, 255, 255, 255);
         }
-        else if (int.Parse(string.Format("{0}", TextValGroup[StatOrder + 1].text)) - PreStat[StatOrder] < 0)
+        else if (int.Parse(string.Format("{0}", TextValGroup[StatOrder].text)) - PreStat[StatOrder - 1] < 0)
         {
             Debug.Log("감소");
-            VariationGroup[StatOrder].color = new Color32(0, 0, 255, 255);
+            VariationGroup[StatOrder - 1].color = new Color32(0, 0, 255, 255);
         }
     }
 

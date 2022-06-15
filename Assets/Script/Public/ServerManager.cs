@@ -133,7 +133,7 @@ public class ServerManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 0 - 유저정보, 1 - 퀘스트, 2 - 리스커, 3 - 장비
+    /// UserDataIndex : 0 - 유저정보, 1 - 퀘스트, 2 - 리스커, 3 - 장비
     /// </summary> 
     public void RequestUserInfo(int UserDataIndex)
     {

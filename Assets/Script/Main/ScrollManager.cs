@@ -1,21 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class ScrollManager : MonoBehaviour, IPointerClickHandler
 {
-    //QuestMenu
+    public Toggle SettingToggle;
     public GameObject CloseMenu;
 
-    // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         /*if (Input.GetKeyDown(KeyCode.Escape))
@@ -31,9 +29,9 @@ public class ScrollManager : MonoBehaviour, IPointerClickHandler
 
     public void HideAllMenu()
     {
+        SettingToggle.isOn = false;
         // 킉 메뉴 닫기
         Debug.Log("모든 메뉴 닫기");
-        CloseMenu.SetActive(false);
         // 모든 자식의 SetActive를 false로 
         for (int i = 0; i < CloseMenu.transform.childCount; i++)
         {

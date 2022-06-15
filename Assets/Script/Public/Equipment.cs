@@ -1,7 +1,6 @@
 public class Equipment
 {
     private string _equipmentnumber;
-    private int _equipmentType;
     private string _owernumber;
     private int _stat = -1;
     // 1 - ¹«±â
@@ -12,13 +11,6 @@ public class Equipment
         get
         {
             return _equipmentnumber;
-        }
-    }
-    public int EquipmentType
-    {
-        get
-        {
-            return _equipmentType;
         }
     }
     public string OwerNumber
@@ -47,10 +39,9 @@ public class Equipment
         }
     }
 
-    public Equipment(string NewEquipmentNumber, int NewEquipmentType, string NewOwerNumber, int StatOrder,  int NewStat)
+    public Equipment(string NewEquipmentNumber, string NewOwerNumber, int StatOrder,  int NewStat)
     {
         _equipmentnumber = NewEquipmentNumber;
-        _equipmentType = NewEquipmentType;
         _owernumber = NewOwerNumber;
         _statorder = StatOrder;
         _stat = NewStat;

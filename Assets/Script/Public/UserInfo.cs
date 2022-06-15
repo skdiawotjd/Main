@@ -192,15 +192,14 @@ public class UserInfo
                 }
                 break;
             case 3:
-                // [{"EquipmentNumber":"1100","EquipmentType":"0","OwnerNumber":"11000","StatOrder":"0","Stat":"100"}}]에서
-                // "EquipmentNumber":"1100","EquipmentType":"0","OwnerNumber":"11000","StatOrder":"0","Stat":"100" 값 추출
+                // [{"EquipmentNumber":"1100","OwnerNumber":"11000","StatOrder":"0","Stat":"100"}}]에서
+                // "EquipmentNumber":"1100","OwnerNumber":"11000","StatOrder":"0","Stat":"100" 값 추출
                 SplitString(":\"", '\"', StringForCount, ref tem_list);
 
-                for (int i = 0; i < (tem_list.Count / 5); i++)
+                for (int i = 0; i < (tem_list.Count / 4); i++)
                 {
-
-                    EquipmentDictionary.Add(tem_list[i * 5], new Equipment(tem_list[i * 5], int.Parse(string.Format("{0}", tem_list[(i * 5) + 1])),
-                        tem_list[(i * 5) + 2], int.Parse(string.Format("{0}", tem_list[(i * 5) + 3])), int.Parse(string.Format("{0}", tem_list[(i * 5) + 4]))));
+                    EquipmentDictionary.Add(tem_list[i * 4], new Equipment(tem_list[i * 4], tem_list[(i * 4) + 1],
+                        int.Parse(string.Format("{0}", tem_list[(i * 4) + 2])), int.Parse(string.Format("{0}", tem_list[(i * 4) + 3]))));
                 }
 
                 break;
@@ -219,7 +218,7 @@ public class UserInfo
     public void SetEquipmentToRisker(string SetRiskerNumber, string EquipmentNumber)
     {
         // 리스커안에 있는 stat에 장비의 stat를 더해서 attack등을 set한다
-        RiskerDictionary[SetRiskerNumber].SetEquipment(EquipmentDictionary[EquipmentNumber].EquipmentType, EquipmentNumber);
+        RiskerDictionary[SetRiskerNumber].SetEquipment(EquipmentNumber[0] - '0', EquipmentNumber);
     }
 
     /// <summary>

@@ -67,6 +67,18 @@ public class Risker
             _activeEquipmentNumber = value;
         }
     }
+
+    public string[] ActiveEquipmentNumber
+    {
+        get
+        {
+            return _activeEquipmentNumber;
+        }
+        set
+        {
+            _activeEquipmentNumber = value;
+        }
+    }
     public int StatStr
     {
         get
@@ -173,17 +185,6 @@ public class Risker
         }
     }
 
-    public string[] ActiveEquipmentNumber
-    {
-        get
-        {
-            return _activeEquipmentNumber;
-        }
-        set
-        {
-            _activeEquipmentNumber = value;
-        }
-    }
 
     /*    private int AddEquipmentStat(int StatOrder)
         {
@@ -202,49 +203,6 @@ public class Risker
     public void SetEquipment(int EquipmentType, string EquipmentNumber)
     {
         ActiveEquipmentNumber[EquipmentType-1] = EquipmentNumber;
-
-        /*if (EquipmentNumber < 1000)
-        {
-            ActiveEquipmentNumber[0] = EquipmentNumber;
-        }
-        else if (EquipmentNumber < 2000)
-        {
-            ActiveEquipmentNumber[1] = EquipmentNumber;
-        }
-        else if (EquipmentNumber < 3000)
-        {
-            ActiveEquipmentNumber[2] = EquipmentNumber;
-        }
-        else if (EquipmentNumber < 4000)
-        {
-            ActiveEquipmentNumber[3] = EquipmentNumber;
-        }*/
-
-
-        /*switch(StatOrder)
-        {
-            // StatOrder이 0이면 무기가 없음
-            case 0:
-                _physicalAttack = StatStr;
-                _magcialAttack = StatInt;
-                _hp = StatDef;
-                _defense = StatDef;
-                _speed = StatAgi;
-                break;
-            case 1:
-                _physicalAttack = StatStr + addStat;
-                break;
-            case 2:
-                _magcialAttack = StatInt + addStat;
-                break;
-            case 3:
-                _hp = StatDef + addStat;
-                _defense = StatDef + addStat;
-                break;
-            case 4:
-                _speed = StatAgi + addStat;
-                break;
-        }*/
     }
 
     public Risker(string NewRiskerNumber, int NewRiskerLevel, double NewRiskerExp, string NewActiveEquipmentNumber)

@@ -14,7 +14,7 @@ public class BottomButtonManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape))
         {
             BackToScene();
         }

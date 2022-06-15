@@ -101,7 +101,6 @@ public class UserInfoManager : MonoBehaviour
         }
     }
 
-    // User_Info, Risker, Equipment가 각각 갱신되는 함수 필요
     private void SplitString(string SeparatorString, char UntilString, string StringForCount, ref List<string> tem_list)
     {
         int index = 0;
@@ -131,14 +130,11 @@ public class UserInfoManager : MonoBehaviour
         // [{"UserCode":"0000","UserName":"skdiawotjd","UserLevel":"1","UserExp":"1","Gold":"1","Diamond":"1"}]
         SplitString(":\"", '\"', UpdatedUserData[0], ref tem_list);
 
+        // UserInfo(string NewUserCode, string NewUserName, int NewUserLevel, double NewUserExp, int NewGold, int NewDiamond,
+        //  string NewQuest, string NewRisker, string NewEquipment)
         UserInfo = new UserInfo(tem_list[0], tem_list[1], int.Parse(string.Format("{0}", tem_list[2])), double.Parse(string.Format("{0}", tem_list[3])),
             int.Parse(string.Format("{0}", tem_list[4])), int.Parse(string.Format("{0}", tem_list[5])),
             UpdatedUserData[1], UpdatedUserData[2], UpdatedUserData[3]);
-
-        /*UserInfo = new UserInfo("skdiawotjd", 1, 10.0f, 100, 200, 
-            2, "리스커", 3, "장비");*/
-        // public UserInfo(string NewUserName, int NewUserLevel, double NewUserExp, int NewGold, int NewDiamond,
-        // int NewCountRisker, string NewRisker, int NewCountEquipment, string NewEquipment)
 
         // 서버에서 받은 데이터를 모두 갱신하였으므로 갱신을 판단하는 변수 초기화
         for(int i = 0; i < WeatherUpdateData.Length; i++)

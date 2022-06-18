@@ -14,8 +14,10 @@ public class BarManager2 : MonoBehaviour
     int questProcessivity = 0;
     int questCount = 0;
 
+    private UserInfoManager UserInfoManager;
     public GameObject questPanel; // 퀘스트가 로드되는 패널
     public GameObject btnPanel; // 버튼 목록이 활성화되는 패널
+    public int questType;
     
 
     QuestData test;
@@ -29,6 +31,7 @@ public class BarManager2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UserInfoManager = GameObject.Find("UserInfoManager").GetComponent<UserInfoManager>();
         questText = gameObject.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>(); // Q패널의 퀘스트 텍스트 불러오기
         QCell = CSVReader.Read("Quest"); // csv 파일 불러오기
         questList = new Dictionary<int, QuestData>(); // 퀘스트 리스트 딕셔너리로 생성하기
@@ -109,7 +112,62 @@ public class BarManager2 : MonoBehaviour
     }
     public void CreateBtns() // 버튼 생성
     {
-        for (int nn = 0; nn < QCell.Count; nn++)
+
+        switch(questType)
+        {
+            case 1000:
+                for(int i=1100;i < 2000; i+= 100) 
+                {
+                    if (UserInfoManager.UserInfo.QuestDictionary.ContainsKey((i).ToString()))
+                    {
+                        GameObject button = Instantiate(btnPrefab); // 버튼을 생성
+                        button.name = (i).ToString(); // 버튼의 이름을 딕셔너리의 인덱스와 동일하게 생성
+                        button.GetComponent<Button>().onClick.AddListener(() => { QuestRoad(); }); // 버튼에 퀘스트를 로드하는 온클릭 리스너 삽입
+                        btnText = button.transform.GetChild(0).GetComponent<TextMeshProUGUI>(); // 버튼의 텍스트를 가져온다
+                        btnText.text = "퀘스트 " + i + "번"; // 버튼의 텍스트를 수정
+                        RectTransform btnpos = button.GetComponent<RectTransform>(); // 버튼의 Transform을 가져온다
+                        btnpos.SetParent(gameObject.transform.GetChild(0).transform, false);
+                        // 부모 오브젝트 설정. 부모의 transform을 받기 위함
+                    }
+                }
+                break;
+            case 2000:
+                for (int i = 2100; i < 3000; i += 100)
+                {
+                    if (UserInfoManager.UserInfo.QuestDictionary.ContainsKey((i).ToString()))
+                    {
+                        GameObject button = Instantiate(btnPrefab); // 버튼을 생성
+                        button.name = (i).ToString(); // 버튼의 이름을 딕셔너리의 인덱스와 동일하게 생성
+                        button.GetComponent<Button>().onClick.AddListener(() => { QuestRoad(); }); // 버튼에 퀘스트를 로드하는 온클릭 리스너 삽입
+                        btnText = button.transform.GetChild(0).GetComponent<TextMeshProUGUI>(); // 버튼의 텍스트를 가져온다
+                        btnText.text = "퀘스트 " + i + "번"; // 버튼의 텍스트를 수정
+                        RectTransform btnpos = button.GetComponent<RectTransform>(); // 버튼의 Transform을 가져온다
+                        btnpos.SetParent(gameObject.transform.GetChild(0).transform, false);
+                        // 부모 오브젝트 설정. 부모의 transform을 받기 위함
+                    }
+                }
+                break;
+            case 3000:
+                for (int i = 3100; i < 4000; i += 100)
+                {
+                    if (UserInfoManager.UserInfo.QuestDictionary.ContainsKey((i).ToString()))
+                    {
+                        GameObject button = Instantiate(btnPrefab); // 버튼을 생성
+                        button.name = (i).ToString(); // 버튼의 이름을 딕셔너리의 인덱스와 동일하게 생성
+                        button.GetComponent<Button>().onClick.AddListener(() => { QuestRoad(); }); // 버튼에 퀘스트를 로드하는 온클릭 리스너 삽입
+                        btnText = button.transform.GetChild(0).GetComponent<TextMeshProUGUI>(); // 버튼의 텍스트를 가져온다
+                        btnText.text = "퀘스트 " + i + "번"; // 버튼의 텍스트를 수정
+                        RectTransform btnpos = button.GetComponent<RectTransform>(); // 버튼의 Transform을 가져온다
+                        btnpos.SetParent(gameObject.transform.GetChild(0).transform, false);
+                        // 부모 오브젝트 설정. 부모의 transform을 받기 위함
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
+/*        for (int nn = 0; nn < QCell.Count; nn++)
         {
             GameObject button = Instantiate(btnPrefab); // 버튼을 생성
             button.name = ((nn + 1) * 10).ToString(); // 버튼의 이름을 딕셔너리의 인덱스와 동일하게 생성
@@ -119,7 +177,7 @@ public class BarManager2 : MonoBehaviour
             RectTransform btnpos = button.GetComponent<RectTransform>(); // 버튼의 Transform을 가져온다
             btnpos.SetParent(gameObject.transform.GetChild(0).transform, false);
             // 부모 오브젝트 설정. 부모의 transform을 받기 위함
-        }
+        }*/
     }
     public void QuestReturn() // 퀘스트 내용 확인 후 뒤로가기 버튼 클릭 시
     {

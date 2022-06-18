@@ -13,9 +13,5 @@ public class QuestManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    
-    private void CreateQuestInfo()
-    {
 
-    }
 }

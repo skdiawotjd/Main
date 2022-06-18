@@ -4921,6 +4921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questPanel: {fileID: 5364297490587069804}
   btnPanel: {fileID: 5364297490473740989}
+  questType: 3000
   btnPrefab: {fileID: 4976827678317642530, guid: 0c7447525827ded42b6c4cbea8396a1e,
     type: 3}
 --- !u!222 &5364297489486191416
@@ -5919,6 +5920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questPanel: {fileID: 5364297489667639068}
   btnPanel: {fileID: 5364297488617032322}
+  questType: 2000
   btnPrefab: {fileID: 4976827678317642530, guid: 0c7447525827ded42b6c4cbea8396a1e,
     type: 3}
 --- !u!1 &5364297490356617014
@@ -6422,6 +6424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questPanel: {fileID: 5364297489641603515}
   btnPanel: {fileID: 5364297488961364540}
+  questType: 1000
   btnPrefab: {fileID: 4976827678317642530, guid: 0c7447525827ded42b6c4cbea8396a1e,
     type: 3}
 --- !u!1 &5364297490540002403

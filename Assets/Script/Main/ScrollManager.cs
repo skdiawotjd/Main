@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class ScrollManager : MonoBehaviour, IPointerClickHandler
 {
-    public Toggle SettingToggle;
     public GameObject CloseMenu;
 
     void Start()
@@ -29,7 +27,6 @@ public class ScrollManager : MonoBehaviour, IPointerClickHandler
 
     public void HideAllMenu()
     {
-        SettingToggle.isOn = false;
         // 킉 메뉴 닫기
         Debug.Log("모든 메뉴 닫기");
         // 모든 자식의 SetActive를 false로 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MainManager : MonoBehaviour
 {
+    public GameObject ClosePopUp;
+
     //public SPUM_Prefabs spum;
     // Start is called before the first frame update
     void Start()
@@ -15,7 +17,16 @@ public class MainManager : MonoBehaviour
     void Update()
     {
         //spum.PlayAnimation("Attack_Normal");
-        
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            ClosePopUp.SetActive(true);
+        }
+    }
+
+    public void GameQuit()
+    {
+        Application.Quit();
+        Debug.Log("asd");
     }
 
     /*IEnumerator abc()

@@ -7,6 +7,7 @@ using TMPro;
 
 public class BottomButtonManager : MonoBehaviour
 {
+
     void Start()
     {
         SwitchScene();
@@ -107,7 +108,7 @@ public class BottomButtonManager : MonoBehaviour
         // 메인 씬이 아니면
         {
             //SceneManager.LoadScene("Main");
-            MoveScene(0);
+            MoveScene(1);
         }
 
     }
